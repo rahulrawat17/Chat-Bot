@@ -57,11 +57,11 @@ while(True):
   for x in range(20):
     temp[0,x] = ques[x]
 
-  p_a = model.predict(sess, temp.T)
+  predicted_answer = model.predict(sess, temp.T)
 
-  q = data_utils.decode(sequence=temp[0], lookup=metadata['idx2w'], separator=' ')
+  q = data_utils.decode(sequence = temp[0], lookup=metadata['idx2w'], separator=' ')
 
-  de2 = data_utils.decode(sequence=p_a[0], lookup=metadata['idx2w'], separator=' ').split(' ')
+  raw_answer = data_utils.decode(sequence = predicted_answer[0], lookup=metadata['idx2w'], separator=' ').split(' ')
 
-  ans2 = ' '.join(de2)
-  print("Chatbot : " + ans2)
+  final_answer = ' '.join(raw_answer)
+  print("Chatbot : " + final_answer)
