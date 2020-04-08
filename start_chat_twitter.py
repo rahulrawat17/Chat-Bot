@@ -47,19 +47,19 @@ while(True):
   def c_s2i(ques, w2idx):
     return [w2idx.get(word, w2idx['unk']) for word in ques.split()]
 
-  question = input("You : ")
-  if question == "bye":
+  ques = input("You : ")
+  if ques == "bye":
     print("Chatbot :  bye see you later :)")
     break
   ques = c_s2i(ques, metadata['w2idx'])
-  question = question + [metadata['w2idx']['_']] * (20-len(ques))
+  ques = ques + [metadata['w2idx']['_']] * (20-len(ques))
 
   for x in range(20):
-    temp[0,x] = question[x]
+    temp[0,x] = ques[x]
 
-  predicted_answer = model.predict(sess, temp.T)
+  p_a = model.predict(sess, temp.T)
 
-  raw_answer = data_utils.decode(sequence = predicted_answer[0], lookup=metadata['idx2w'], separator=' ').split(' ')
+  de2 = data_utils.decode(sequence=p_a[0], lookup=metadata['idx2w'], separator=' ').split(' ')
 
-  final_answer = ' '.join(raw_answer)
-  print("Chatbot : " + final_answer)
+  ans2 = ' '.join(de2)
+  print("Chatbot : " + ans2)
